@@ -39,7 +39,7 @@ module.exports = async function(collection, params) {
   // https://www.npmjs.com/package/mongoist#cursor-operations
   const findMethod = collection.findAsCursor ? 'findAsCursor': 'find';
 
-  const results = await collection[findMethod]({ $and: [cursorQuery, params.query] }, params.fields)
+  const results = await collection[findMethod]({ $and: [cursorQuery, params.query] }, params.opts)
     .sort($sort)
     .limit(params.limit + 1) // Query one more element to see if there's another page.
     .toArray();
